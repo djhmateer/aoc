@@ -2,16 +2,17 @@
 // "@types/node": "^22.10.1" for dev dependencies
 import * as fs from 'fs';
 
-// Read the file synchronously
-// const fileContent = fs.readFileSync('1.txt', 'utf-8');
-let fileContent : string = fs.readFileSync('1.txt', 'utf-8');
-console.log(typeof(fileContent));
+// Read the file synchronously into immutable type inferred string
+// need utf-8 to avoid returning a buffer (for binary files)
+const fileContent = fs.readFileSync('1.txt', 'utf-8');
 
-// Split the content into lines and map into an array of arrays
+// Parse the file content into a 2D array of numbers
 const data: number[][] = fileContent
-  .split('\n') // Split by lines
-  .map(line => line.split(/\s+/)
-  .map(Number)); 
+    .split('\n')               // Split the content into lines
+    .map(line =>               // Process each line
+        line.split(/\s+/)      // Split the line by one or more whitespace characters
+            .map(Number)       // Convert each part into a number
+    );
 
 // Iterate over the data
 for (const [a, b] of data) {
