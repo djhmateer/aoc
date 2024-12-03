@@ -1,10 +1,25 @@
-let message = "good morning";
-let message2= "good afternoon";
-
+let message = "hello laurie";
+let message2: string = "hello henry";
+let message3: string = "hello freddie";
+let message4: string = "hello dave";
 console.log(message);
+console.log(message2);
+console.log(message3);
+console.log(message4);
+
+
+
+
 
 
 // gets a type error
+
+
+
+
+
+
+
 // let message: string = 2;
 
 // console.log(typeof(message)); // string
