@@ -3,15 +3,22 @@
 import * as fs from 'fs';
 
 // Read the file synchronously
-const fileContent = fs.readFileSync('1.txt', 'utf-8');
+// const fileContent = fs.readFileSync('1.txt', 'utf-8');
+let fileContent : string = fs.readFileSync('1.txt', 'utf-8');
+console.log(typeof(fileContent));
 
 // Split the content into lines and map into an array of arrays
 const data: number[][] = fileContent
-  .trim() // Remove extra newlines or spaces
   .split('\n') // Split by lines
-  .map(line => line.split(/\s+/).map(Number)); // Split each line by spaces and convert to numbers
+  .map(line => line.split(/\s+/)
+  .map(Number)); 
 
 // Iterate over the data
 for (const [a, b] of data) {
   console.log(`a: ${a}, b: ${b}`);
 }
+
+
+
+
+// .trim() // Remove extra newlines or spaces

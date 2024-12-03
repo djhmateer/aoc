@@ -1,9 +1,10 @@
 {
-    "compilerOptions": {
-      "target": "ES5",
-      "module": "CommonJS",
-      "outDir": "out",
-      "sourceMap": true
-    }
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "outDir": "out",
+    "incremental": true,
+    "skipLibCheck": true,
+    "sourceMap": true
   }
-  
+}
