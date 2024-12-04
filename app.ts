@@ -8,19 +8,12 @@ console.log(message3);
 console.log(message4);
 
 
-
-
-
-
 // gets a type error
 
-
-
-
-
-
-
 // let message: string = 2;
+let foo: string = "2";
+const bar: number = 2;
+console.log(typeof(bar)); // number
 
 // console.log(typeof(message)); // string
 
