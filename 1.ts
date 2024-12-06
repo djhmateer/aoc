@@ -33,15 +33,14 @@ const data: number[][] = fileContent
 const leftList: number[] = data.map(row => row[0]); // [3, 4, 2, 1, 3, 3]
 const rightList = data.map(row => row[1]); // [4, 3, 5, 3, 9, 3]
 
-const foo = 2
-
 // this mutates the original array!
 // The array's contents can be modified, but the reference itself cannot point to a new array. 
 // const leftListSorted = leftList.sort((a, b) => a - b); // [1, 2, 3, 3, 3, 4]
 
-// makes a copy of original array
+// ...  spread operator makes a shallow copy of leftList
+// so as not to mutate the original array
 const leftListSorted = [...leftList].sort((a, b) => a - b); // [1, 2, 3, 3, 3, 4]
-const rightListSorted = rightList.sort((a, b) => a - b); // [3, 3, 3, 4, 5, 9]
+const rightListSorted =[...rightList].sort((a, b) => a - b); // [3, 3, 3, 4, 5, 9]
 
 // Calculate the differences and sum them up
 let totalDifference = 0;
