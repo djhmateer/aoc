@@ -1,4 +1,3 @@
-// kebab-case.ts for filenames
 import * as fs from "fs";
 
 const fileContent: string = fs.readFileSync('2.txt', 'utf-8');
@@ -20,10 +19,8 @@ const data: number[][] = fileContent
 //   [1, 3, 6, 7, 9],
 // ];
 
-// PascalCase for class names and types
 type Direction = "flat" | "up" | "down";
 
-// camelCase for variables and functions
 let totalSafe = 0;
 
 // Take each row into an array

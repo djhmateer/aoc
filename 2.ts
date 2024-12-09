@@ -3,22 +3,23 @@ import * as fs from "fs";
 
 const fileContent: string = fs.readFileSync('2.txt', 'utf-8');
 
-const data: number[][] = fileContent
-  .split('\n')            // Split the content into lines
-  .map(line =>            // Process each line
-    line.split(/\s+/)     // Split the line by one or more whitespace characters
-        .map(Number)      // Convert each part into a number
-  );
+// const data: number[][] = fileContent
+//   .split('\n')            // Split the content into lines
+//   .map(line =>            // Process each line
+//     line.split(/\s+/)     // Split the line by one or more whitespace characters
+//         .map(Number)      // Convert each part into a number
+//   );
 
 
-// const data: number[][] = [
-//   [7, 6, 4, 2, 1],
-//   [1, 2, 7, 8, 9],
-//   [9, 7, 6, 2, 1],
-//   [1, 3, 2, 4, 5],
-//   [8, 6, 4, 4, 1],
-//   [1, 3, 6, 7, 9],
-// ];
+const data: number[][] = [
+  [7, 7, 4, 2, 1],
+  [7, 6, 4, 2, 1],
+  [1, 2, 7, 8, 9],
+  [9, 7, 6, 2, 1],
+  [1, 3, 2, 4, 5],
+  [8, 6, 4, 4, 1],
+  [1, 3, 6, 7, 9],
+];
 
 // PascalCase for class names and types
 type Direction = "flat" | "up" | "down";
