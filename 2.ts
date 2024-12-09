@@ -4,10 +4,10 @@ import * as fs from "fs";
 const fileContent: string = fs.readFileSync('2.txt', 'utf-8');
 
 const data: number[][] = fileContent
-  .split('\n')               // Split the content into lines
-  .map(line =>               // Process each line
+  .split('\n')            // Split the content into lines
+  .map(line =>            // Process each line
     line.split(/\s+/)     // Split the line by one or more whitespace characters
-      .map(Number)      // Convert each part into a number
+        .map(Number)      // Convert each part into a number
   );
 
 
@@ -26,26 +26,24 @@ type Direction = "flat" | "up" | "down";
 // camelCase for variables and functions
 let totalSafe = 0;
 
-// take each row into an array
+// Take each row into an array
 for (const row of data) {
-  // console.log(row);
 
-  let rowSafe = true;
-  let lastElement: number;
-  let lastDirection: Direction;
+  let rowSafe = true; // Track if the current row is safe
+  let lastElement: number | undefined; // Previous element in the row
+  let lastDirection: Direction | undefined; // Previous direction
 
   // Iterate over each element in the row
   for (let i = 0; i < row.length; i++) {
     const element = row[i];
 
-    // console.log("element in row: ", element);
-
     if (i === 0) {
+      // Initialize the first element and continue to the next
       lastElement = element;
-      continue; // Skip to the next element as we are at the start of the row
+      continue; 
     }
 
-    // Element is smaller than the last element
+    // 1. Current element is smaller than the last
     if (element < lastElement) {
       if (i > 1) {
         if (lastDirection != "down") {
@@ -54,31 +52,28 @@ for (const row of data) {
           break;
         }
       }
-      // difference between the two elements
+
       const difference = lastElement - element;
       if (difference > 3) {
-        rowSafe = false;
-        // break out of the loop as the row is not safe becuase the difference is greater than 3
+        rowSafe = false; // Unsafe due to a difference greater than 3
         break;
       }
       lastElement = element;
       lastDirection = "down";
     }
 
-    // Element is larger than the last element
+    // 2. Element is larger than the last element
     else if (element > lastElement) {
       if (i > 1) {
         if (lastDirection != "up") {
-          rowSafe = false;
-          // break out of the loop as the row is not safe becuase the direction is not up
+          rowSafe = false; // Unsafe due to a inconsistent direction with last element
           break;
         }
       }
-      // difference between the two elements
+
       const difference = element - lastElement;
       if (difference > 3) {
-        rowSafe = false;
-        // break out of the loop as the row is not safe becuase the difference is greater than 3
+        rowSafe = false; // Unsafe due to a difference greater than 3
         break
       }
       lastElement = element;
@@ -86,20 +81,18 @@ for (const row of data) {
     }
 
     // Element is the same as the last element
-    else if (element === lastElement) {
-      rowSafe = false;
-      // break out of the loop as the row is not safe becuase 2 consecutive elements are the same
+    else {
+      rowSafe = false; // Unsafe due to consecutive identical elements
       break;
     }
-
   }
 
   if (rowSafe) {
-    // console.log("Row is safe");
     totalSafe += 1;
   }
 }
 
+// 516
 console.log(`Total safe rows: ${totalSafe}`);
 
 //const fileContent: string = fs.readFileSync('1full.txt', 'utf-8');
