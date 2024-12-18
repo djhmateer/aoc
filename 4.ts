@@ -65,24 +65,34 @@ for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
 }
 
 // 3. diagonal down right
-// for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
 
 // go down every row 
-const rowNumber = 0;
-// go across each column
-for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
-    console.log("checking diagonal down right starting at row number: ", rowNumber, "column number: ", columnNumber);
-    let stringToCheck = '';
-    for (let i = 0; i < colCount - columnNumber; i++) {
-        stringToCheck += data[i + columnNumber][i];
+for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
+
+    // go across each column
+    for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
+        console.log("checking diagonal down right starting at row number: ", rowNumber, "column number: ", columnNumber);
+        let stringToCheck = '';
+
+        // go down and right from starting point of rowNumber and columnNumber
+        // this works for the first row
+        // i is
+        // j is 
+        const j = 0;
+        for (let i = 0; i < colCount - columnNumber; i++) {
+            const x = i + columnNumber;
+            const y = i;
+            // stringToCheck += data[i + columnNumber][i];
+            stringToCheck += data[x][y];
+        }
+        console.log("stringToCheck: ", stringToCheck);
+
+        // forward 
+        totalCount += countOccurrences(stringToCheck, "XMAS");
+
+        // reverse (0 occurance in test case)
+        totalCount += countOccurrences(stringToCheck, "SAMX");
     }
-    console.log("stringToCheck: ", stringToCheck);
-
-    // forward 
-    totalCount += countOccurrences(stringToCheck, "XMAS");
-
-    // reverse (0 occurance in test case)
-    totalCount += countOccurrences(stringToCheck, "SAMX");
 }
 
 console.log("Total count: ", totalCount);
