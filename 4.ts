@@ -34,51 +34,58 @@ const data: string[][] = fileContent
     .split('\n')                  // Split the sting into an array of lines
     .map(line => line.split('')); // Split each line into an array of characters
 
+// both are the same (10 in the case of the test case)
+const rowCount = data.length;
+const colCount = data[0].length;
+console.log("rowCount: ", rowCount, "colCount: ", colCount);
 
-let counter = 0;
+let totalCount = 0;
 // 1. make a string - horizontal
-for (let rowNumber = 0; rowNumber < data.length; rowNumber++) {
+for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
 
     console.log("checking row number: ", rowNumber);
     // why does debugger go into the js file here?
     const stringToCheck: string = data[rowNumber].join('');
 
     // forward (3 occurances in test case)
-    counter += countOccurrences(stringToCheck, "XMAS");
+    totalCount += countOccurrences(stringToCheck, "XMAS");
 
     // reverse (2 occurances in test case)
-    counter += countOccurrences(stringToCheck, "SAMX");
+    totalCount += countOccurrences(stringToCheck, "SAMX");
 }
 
 // 2. vertical
-for (let columnNumber = 0; columnNumber < data[0].length; columnNumber++) {
+for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
     console.log("checking column number: ", columnNumber);
     const stringToCheck: string = data.map(row => row[columnNumber]).join('');
 
-    // forward 
-    counter += countOccurrences(stringToCheck, "XMAS");
+    totalCount += countOccurrences(stringToCheck, "XMAS");
 
-    // reverse 
-    counter += countOccurrences(stringToCheck, "SAMX");
+    totalCount += countOccurrences(stringToCheck, "SAMX");
 }
 
 // 3. diagonal down right
-for (let rowNumber = 0; rowNumber < data.length; rowNumber++) {
-    console.log("checking diagonal down right row number: ", rowNumber);
+// for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
+
+// go down every row 
+const rowNumber = 0;
+// go across each column
+for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
+    console.log("checking diagonal down right starting at row number: ", rowNumber, "column number: ", columnNumber);
     let stringToCheck = '';
-    for (let i = 0; i < data.length - rowNumber; i++) {
-        stringToCheck += data[i + rowNumber][i];
+    for (let i = 0; i < colCount - columnNumber; i++) {
+        stringToCheck += data[i + columnNumber][i];
     }
     console.log("stringToCheck: ", stringToCheck);
 
     // forward 
-    counter += countOccurrences(stringToCheck, "XMAS");
+    totalCount += countOccurrences(stringToCheck, "XMAS");
 
     // reverse (0 occurance in test case)
-    counter += countOccurrences(stringToCheck, "SAMX");
+    totalCount += countOccurrences(stringToCheck, "SAMX");
 }
 
-console.log("Total occurances: ", counter);
+console.log("Total count: ", totalCount);
 
 function countOccurrences(haystack: string, needle: string): number {
     let funcCounter = 0;
