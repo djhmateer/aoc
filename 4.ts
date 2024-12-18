@@ -35,62 +35,62 @@ const data: string[][] = fileContent
     .map(line => line.split('')); // Split each line into an array of characters
 
 // both are the same (10 in the case of the test case)
-const rowCount = data.length;
-const colCount = data[0].length;
-console.log("rowCount: ", rowCount, "colCount: ", colCount);
+const maxFoo = data.length;
+// const colCount = data[0].length;
+// console.log("rowCount: ", rowCount, "colCount: ", colCount);
 
 let totalCount = 0;
 // 1. make a string - horizontal
-for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
+// for (let rowNumber = 0; rowNumber < maxFoo; rowNumber++) {
 
-    console.log("checking row number: ", rowNumber);
-    // why does debugger go into the js file here?
-    const stringToCheck: string = data[rowNumber].join('');
+//     console.log("checking row number: ", rowNumber);
+//     // why does debugger go into the js file here?
+//     const stringToCheck: string = data[rowNumber].join('');
 
-    // forward (3 occurances in test case)
-    totalCount += countOccurrences(stringToCheck, "XMAS");
+//     // forward (3 occurances in test case)
+//     totalCount += countOccurrences(stringToCheck, "XMAS");
 
-    // reverse (2 occurances in test case)
-    totalCount += countOccurrences(stringToCheck, "SAMX");
-}
+//     // reverse (2 occurances in test case)
+//     totalCount += countOccurrences(stringToCheck, "SAMX");
+// }
 
 // 2. vertical
-for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
-    console.log("checking column number: ", columnNumber);
-    const stringToCheck: string = data.map(row => row[columnNumber]).join('');
+// for (let columnNumber = 0; columnNumber < maxFoo; columnNumber++) {
+//     console.log("checking column number: ", columnNumber);
+//     const stringToCheck: string = data.map(row => row[columnNumber]).join('');
 
-    totalCount += countOccurrences(stringToCheck, "XMAS");
+//     totalCount += countOccurrences(stringToCheck, "XMAS");
 
-    totalCount += countOccurrences(stringToCheck, "SAMX");
-}
+//     totalCount += countOccurrences(stringToCheck, "SAMX");
+// }
 
-// 3. diagonal down right
 
-// go down every row 
-for (let rowNumber = 0; rowNumber < rowCount; rowNumber++) {
+// **HERE - logical problem.. am getting double ups on the diagonals
+// implement a checker to see if starting position  for this check has already been done?
 
-    // go across each column
-    for (let columnNumber = 0; columnNumber < colCount; columnNumber++) {
-        console.log("checking diagonal down right starting at row number: ", rowNumber, "column number: ", columnNumber);
-        let stringToCheck = '';
+// start every row 
+for (let startRow = 0; startRow < maxFoo; startRow++) {
 
-        // go down and right from starting point of rowNumber and columnNumber
-        // this works for the first row
-        // i is
-        // j is 
-        const j = 0;
-        for (let i = 0; i < colCount - columnNumber; i++) {
-            const x = i + columnNumber;
-            const y = i;
-            // stringToCheck += data[i + columnNumber][i];
-            stringToCheck += data[x][y];
+    // start every column on every row
+    for (let startCol = 0; startCol < maxFoo; startCol++) {
+        // console.log("checking diagonal down right starting at row: ", startRow, "column: ", startCol);
+
+        let stringToCheck = "";
+
+        // 3. go down and right from starting point of rowNumber and columnNumber
+        for (let i = 0; i < maxFoo - startRow; i++) {
+            const r = i + startRow;
+            const c = i + startCol;
+
+            if (c >= maxFoo) continue; 
+            if (r >= maxFoo) continue; 
+
+            stringToCheck += data[r][c];
+            // console.log(stringToCheck);
         }
-        console.log("stringToCheck: ", stringToCheck);
 
-        // forward 
         totalCount += countOccurrences(stringToCheck, "XMAS");
 
-        // reverse (0 occurance in test case)
         totalCount += countOccurrences(stringToCheck, "SAMX");
     }
 }
