@@ -41,16 +41,46 @@ for (let rowNumber = 0; rowNumber < data.length; rowNumber++) {
 
     console.log("checking row number: ", rowNumber);
     // why does debugger go into the js file here?
-    const rowToCheck: string = data[rowNumber].join('');
+    const stringToCheck: string = data[rowNumber].join('');
 
-    // forward (3 in test case)
-    counter += newFunction(rowToCheck, "XMAS");
+    // forward (3 occurances in test case)
+    counter += countOccurrences(stringToCheck, "XMAS");
 
-    // reverse (2 in test case)
-    counter += newFunction(rowToCheck, "SAMX");
+    // reverse (2 occurances in test case)
+    counter += countOccurrences(stringToCheck, "SAMX");
 }
 
-function newFunction(haystack: string, needle: string): number {
+// 2. vertical
+for (let columnNumber = 0; columnNumber < data[0].length; columnNumber++) {
+    console.log("checking column number: ", columnNumber);
+    const stringToCheck: string = data.map(row => row[columnNumber]).join('');
+
+    // forward 
+    counter += countOccurrences(stringToCheck, "XMAS");
+
+    // reverse 
+    counter += countOccurrences(stringToCheck, "SAMX");
+}
+
+// 3. diagonal down right
+for (let rowNumber = 0; rowNumber < data.length; rowNumber++) {
+    console.log("checking diagonal down right row number: ", rowNumber);
+    let stringToCheck = '';
+    for (let i = 0; i < data.length - rowNumber; i++) {
+        stringToCheck += data[i + rowNumber][i];
+    }
+    console.log("stringToCheck: ", stringToCheck);
+
+    // forward 
+    counter += countOccurrences(stringToCheck, "XMAS");
+
+    // reverse (0 occurance in test case)
+    counter += countOccurrences(stringToCheck, "SAMX");
+}
+
+console.log("Total occurances: ", counter);
+
+function countOccurrences(haystack: string, needle: string): number {
     let funcCounter = 0;
     let xmasIndex = haystack.indexOf(needle);
     while (xmasIndex > -1) {
