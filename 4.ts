@@ -65,35 +65,55 @@ let totalCount = 0;
 // }
 
 
-// **HERE - logical problem.. am getting double ups on the diagonals
-// implement a checker to see if starting position  for this check has already been done?
+// 3. diagonal down right
+// start bottom left
+// do rows first
+for (let startRow = maxFoo - 1; startRow >= 0; startRow--) {
 
-// start every row 
-for (let startRow = 0; startRow < maxFoo; startRow++) {
+    let startCol = 0;
+    let stringToCheck = "";
+    // 3. go down and right from starting point of rowNumber and columnNumber
+    for (let i = 0; i < maxFoo - startRow; i++) {
+        const r = i + startRow;
+        const c = i + startCol;
 
-    // start every column on every row
-    for (let startCol = 0; startCol < maxFoo; startCol++) {
-        // console.log("checking diagonal down right starting at row: ", startRow, "column: ", startCol);
-
-        let stringToCheck = "";
-
-        // 3. go down and right from starting point of rowNumber and columnNumber
-        for (let i = 0; i < maxFoo - startRow; i++) {
-            const r = i + startRow;
-            const c = i + startCol;
-
-            if (c >= maxFoo) continue; 
-            if (r >= maxFoo) continue; 
-
-            stringToCheck += data[r][c];
-            // console.log(stringToCheck);
-        }
-
-        totalCount += countOccurrences(stringToCheck, "XMAS");
-
-        totalCount += countOccurrences(stringToCheck, "SAMX");
+        stringToCheck += data[r][c];
     }
+
+    console.log(stringToCheck);
+    totalCount += countOccurrences(stringToCheck, "XMAS");
+
+    totalCount += countOccurrences(stringToCheck, "SAMX");
 }
+
+// **HERE** go right
+
+
+// for (let startRow = 0; startRow < maxFoo; startRow++) {
+
+//     // start every column on every row
+//     for (let startCol = 0; startCol < maxFoo; startCol++) {
+//         // console.log("checking diagonal down right starting at row: ", startRow, "column: ", startCol);
+
+//         let stringToCheck = "";
+
+//         // 3. go down and right from starting point of rowNumber and columnNumber
+//         for (let i = 0; i < maxFoo - startRow; i++) {
+//             const r = i + startRow;
+//             const c = i + startCol;
+
+//             if (c >= maxFoo) continue; 
+//             if (r >= maxFoo) continue; 
+
+//             stringToCheck += data[r][c];
+//             // console.log(stringToCheck);
+//         }
+
+//         totalCount += countOccurrences(stringToCheck, "XMAS");
+
+//         totalCount += countOccurrences(stringToCheck, "SAMX");
+//     }
+// }
 
 console.log("Total count: ", totalCount);
 
